@@ -23,4 +23,21 @@ public class Generator : MonoBehaviour
     {
         
     }
+
+    void GenerateVertex() {
+
+    }
+
+    void GenerateEdgeOnGraph() {
+
+    }
+
+    void GenerateEdgeOnVertex() {
+
+    }
+
+    void GenerateEdgeOnVertices(Vertex v1, Vertex v2) {
+        Edge e = Instantiate(edgePrefab, Vector3.zero, Quaternion.identity);
+        e.AddToGraph(v1, v2);
+    }
 }

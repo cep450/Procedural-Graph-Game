@@ -5,7 +5,7 @@ using UnityEngine;
 public class Graph : MonoBehaviour
 {
 
-
+    List<Vertex> vertices;
 
     //for convex hull 
     //https://docs.unity3d.com/ScriptReference/PolygonCollider2D.SetPath.html
@@ -16,12 +16,18 @@ public class Graph : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        vertices = new List<Vertex>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    
+
+    void UpdateHull() {
+
     }
 }
