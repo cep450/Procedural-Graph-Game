@@ -11,17 +11,6 @@ public class Edge : MonoBehaviour
     private float weightMultiplier = 1f;
     public float weight { get; private set; } //TODO set this to return length * weightMultiplier
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void AddToGraph(Vertex v, Vertex w) {
 
@@ -36,12 +25,12 @@ public class Edge : MonoBehaviour
 
         //scale out for length
         length = Mathf.Abs((v1.transform.position - v2.transform.position).magnitude);
-        transform.localScale = new Vector3(length / 2f, 1, 1);
+        transform.localScale = new Vector3(length, 1, 1);
 
-        //TODO rotation 
-        //transform.rotation = 
+        //rotation  
+        transform.LookAt(v1.transform);
+        transform.Rotate(0f, 90f, 0f);
         
-
     }
 
     public void Delete() {
