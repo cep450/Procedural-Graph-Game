@@ -9,7 +9,10 @@ public class Edge : MonoBehaviour
     public Vertex v2 { get; private set; }
     private float length; 
     private float weightMultiplier = 1f;
-    public float weight { get; private set; } //TODO set this to return length * weightMultiplier
+    public float weight {
+        get { return length * weightMultiplier; }
+        private set { weight = value; }
+    }
 
 
     public void AddToGraph(Vertex v, Vertex w) {
@@ -17,8 +20,8 @@ public class Edge : MonoBehaviour
         v1 = v;
         v2 = w;
 
-        v1.AddEdge(this);
-        v2.AddEdge(this);
+        v1.AddEdge(this, w);
+        v2.AddEdge(this, v);
 
         //position of center 
         transform.position = (v1.transform.position + v2.transform.position) / 2f;

@@ -22,11 +22,11 @@ public class Graph
 
     public void AddVertex(Vertex v) {
         vertices.Add(v);
-        if(vertices.Count > 3) {
+        /*if(vertices.Count > 3) {
             UpdateHull(v);
         } else {
             hull.Add(v);
-        }
+        }*/
     }
 
     void UpdateHull(Vertex newVert) {
