@@ -18,4 +18,12 @@ public class Util : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
+    //Returns the angle these 3 points make, in radians, with pt2 being the center vert.
+    public static float AnglePointsMake(Vector2 pt1, Vector2 pt2, Vector2 pt3) {
+
+        //TODO
+
+        return 0f;
+    }
 }

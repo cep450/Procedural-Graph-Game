@@ -12,7 +12,7 @@ public class Generator : MonoBehaviour
 
     [SerializeField] float minDistBetweenPts, maxDistBetweenPts;
 
-    Graph graph;
+    public static Graph graph;
 
     ContactFilter2D vertexFilter = new ContactFilter2D();
 
@@ -64,9 +64,9 @@ public class Generator : MonoBehaviour
         InstantiateEdgeOnVertices(v3, v1);
 
         //add to graph 
-        graph.AddVertex(v1);
-        graph.AddVertex(v2);
-        graph.AddVertex(v3);
+        graph.AddVertex(v1, 0);
+        graph.AddVertex(v2, 0);
+        graph.AddVertex(v3, 0);
 
     }
 
@@ -77,7 +77,8 @@ public class Generator : MonoBehaviour
 
         //TODO do this intelligently 
         //just picks one randomly for testing purposes. 
-        Vertex v = graph.vertices[Random.Range(0, graph.vertices.Count)];
+        Debug.Log(Random.Range(0, graph.hull.Count));
+        Vertex v = graph.hull[Random.Range(0, graph.hull.Count)];
         
         GenerateVertexNear(v);
 
@@ -94,7 +95,11 @@ public class Generator : MonoBehaviour
         //since we know the obtuse angle faces outside the hull and vice versa 
 
         //adjacent verts in hull 
+        Debug.Log(graph.hull.IndexOf(v)); 
         int hullIndex = graph.hull.IndexOf(v);
+        
+        Debug.Log((int)(Mathf.Repeat(hullIndex - 1, graph.hull.Count)));
+        Debug.Log((int)(Mathf.Repeat(hullIndex + 1, graph.hull.Count)));
         Vertex va = graph.hull[(int)(Mathf.Repeat(hullIndex - 1, graph.hull.Count))];
         Vertex vb = graph.hull[(int)(Mathf.Repeat(hullIndex + 1, graph.hull.Count))];
 
@@ -135,6 +140,7 @@ public class Generator : MonoBehaviour
 
         //connect to rest of graph with 
         Vertex newVert = InstantiateVertex(newPointPos);
+        graph.AddVertex(newVert, hullIndex);
         InstantiateEdgeOnVertices(v, newVert);
 
     }
@@ -194,7 +200,6 @@ public class Generator : MonoBehaviour
     //instantiates vertex object, adds to graph 
     Vertex InstantiateVertex(Vector2 pos) {
         Vertex v = Instantiate(vertexPrefab, new Vector3(pos.x, pos.y, vertexPrefab.transform.position.z), Quaternion.identity);
-        graph.AddVertex(v);
         return v;
     }
 }
